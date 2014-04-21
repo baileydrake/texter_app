@@ -1,0 +1,14 @@
+<h1> New Contact </h1>
+
+<% if @contact.errors.any?  %>
+  <p>Somethign went wrong:</p>
+  <ul>
+    <%= @contact.errors.full_contacts.each do |contact| %>
+    <li><%= contact %></li>
+    <% end %>
+  </ul>
+  <%= f.submit :class => 'btn btn-info' %>
+<% end %>
+
+
+  <%=  render 'form' %>
