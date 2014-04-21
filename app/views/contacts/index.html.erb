@@ -2,8 +2,10 @@
 
 <ul>
   <% @contacts.each do |contact| %>
-    <li><%= contact.name %></li>
-      <li><%= link_to
+    <li><%= contact.name %> |<%= contact.number%>| </li>
+      <ul>
+        <li><%= link_to "Edit", edit_contact_path(contact.id) %> | <%= link_to "Delete", contact_path(contact.id), data: { :confirm => "are you sure", :method => "delete" } %> </li>
+      </ul>
   <% end %>
 </ul>
 
