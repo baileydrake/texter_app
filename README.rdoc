@@ -1,0 +1,44 @@
+> require 'rest-client'
+>
+
+
+
+RestClient.post(
+  'https://ACc9e902f79d7359a54144658401bf8023:397508bfa96d83bac4f2264d5d9bd4ff@api.twilio.com/2010-04-01/Accounts/ACc9e902f79d7359a54144658401bf8023/Messages.json',
+  :Body => 'Michael is a cool guy',
+  :To => '8438014873',
+  :From => '8434104991'
+)
+
+response = RestClient::Request.new(
+  :method => :post,
+  :url => 'https://api.twilio.com/2010-04-01/Accounts/ACc9e902f79d7359a54144658401bf8023/Messages.json',
+  :user => 'ACc9e902f79d7359a54144658401bf8023',
+  :password => '397508bfa96d83bac4f2264d5d9bd4ff',
+  :payload => { :Body => 'I have a dog',
+                :From => '8434104991',
+                :To => '8438014873' }
+
+).execute
+
+
+class Message
+def initialize(attributes)
+  @to = attributes['to']
+  @from = attributes['from']
+  @body = attributes['body']
+  @status = attributes['status']
+  end
+end
+
+response = RestClient::Request.new(
+  :method => :get,
+  :url => 'https://api.twilio.com/2010-04-01/Accounts/ACc9e902f79d7359a54144658401bf8023/Messages.json',
+  :user => 'ACc9e902f79d7359a54144658401bf8023',
+  :password => '397508bfa96d83bac4f2264d5d9bd4ff',
+).execute
+
+ parsed_response = JSON.parse(response)
+ messages_data = parsed_response['messages']
+ messages = messages_data.map { |data| Message.new(data) }
+
